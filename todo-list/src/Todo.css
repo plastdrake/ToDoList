@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f5; /* Lighter background for better contrast */
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Softer shadow */
+}
+
+.input-container {
+    display: flex; /* Keep items in a row */
+    align-items: center; /* Center align items vertically */
+}
+
+input[type="text"] {
+    flex: 1; /* Make input take up available space */
+    padding: 10px; /* Adjust padding for height */
+    margin-right: 10px; /* Space between input and button */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 40px; /* Set a fixed height for the input */
+}
+
+button {
+    width: 100%; /* Make button full width */
+    padding: 10px; /* Add padding for a larger button */
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff; /* Primary button color */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Transition effects */
+    font-size: large;
+    margin-top: 10px; /* Space between input and button */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    transform: scale(1.05); /* Slight scale effect */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    margin: 10px 0; /* Space between items */
+    border-radius: 4px; /* Rounded edges for items */
+    background: #f9f9f9; /* Light background for items */
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for items */
+    transition: background 0.3s; /* Transition for hover effect */
+}
+
+li:hover {
+    background: #e9ecef; /* Darken background on hover */
+}
+
+.checkbox {
+    margin-right: 15px; /* Space between checkbox and text */
+    width: 20px; /* Fixed width for checkbox */
+    height: 20px; /* Fixed height for checkbox */
+}
+
+.todo-text {
+    flex-grow: 1; /* Allow the text to grow and fill space */
+    font-size: large; /* Increase font size for readability */
+    transition: color 0.3s; /* Smooth transition for text color */
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray; /* Style for completed tasks */
+    background: #f0f0f5; /* Grayed-out background for completed tasks */
+}
+
+.todo-buttons {
+    display: flex; /* Use flexbox for button alignment */
+    gap: 10px; /* Space between buttons */
+}
+
+.todo-buttons button {
+    background-color: #28a745; /* Green color for Edit/Delete buttons */
+}
+
+.todo-buttons button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
