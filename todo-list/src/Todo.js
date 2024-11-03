@@ -44,11 +44,16 @@ function Todo() {
     const deleteTodo = (index) => {
         const newTodos = todos.filter((_, i) => i !== index);
         setTodos(newTodos);
+        // Reset edit state if the deleted todo is currently being edited
+        if (editIndex === index) {
+            setEditIndex(null);
+            setInputValue(''); // Clear the input if we're deleting the currently edited task
+        }
     };
 
     return (
         <div className="container">
-            <h1>Todo List</h1> {/* Updated title */}
+            <h1>Todo List</h1>
             <div className="input-container">
                 <input
                     type="text"

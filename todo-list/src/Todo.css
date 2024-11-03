@@ -84,10 +84,9 @@ li:hover {
     transition: color 0.3s; /* Smooth transition for text color */
 }
 
-.completed {
+.completed .todo-text {
     text-decoration: line-through;
     color: gray; /* Style for completed tasks */
-    background: #f0f0f5; /* Grayed-out background for completed tasks */
 }
 
 .todo-buttons {
@@ -97,6 +96,7 @@ li:hover {
 
 .todo-buttons button {
     background-color: #28a745; /* Green color for Edit/Delete buttons */
+    text-decoration: none; /* Ensure buttons don't get overlined */
 }
 
 .todo-buttons button:hover {
