@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './Todo.css'; // Make sure to import the CSS file
+import TodoList from './TodoList';
+import TodoInput from './TodoInput';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Todo() {
     const [inputValue, setInputValue] = useState('');
@@ -7,7 +9,6 @@ function Todo() {
         const savedTodos = localStorage.getItem('todos');
         return savedTodos ? JSON.parse(savedTodos) : [];
     });
-
     const [editIndex, setEditIndex] = useState(null);
 
     useEffect(() => {
@@ -15,10 +16,10 @@ function Todo() {
     }, [todos]);
 
     useEffect(() => {
-        document.title = "Todo List"; // Change browser tab title
+        document.title = "Todo List";
     }, []);
 
-    const addTodo = () => {
+    const addOrUpdateTodo = () => {
         if (inputValue.trim() === '') return;
 
         if (editIndex !== null) {
@@ -26,12 +27,12 @@ function Todo() {
                 index === editIndex ? { ...todo, text: inputValue } : todo
             );
             setTodos(updatedTodos);
-            setEditIndex(null);
+            setEditIndex(null); // Reset edit mode
         } else {
             setTodos([...todos, { text: inputValue, completed: false }]);
         }
 
-        setInputValue('');
+        setInputValue(''); // Clear input after adding/updating
     };
 
     const toggleComplete = (index) => {
@@ -44,50 +45,27 @@ function Todo() {
     const deleteTodo = (index) => {
         const newTodos = todos.filter((_, i) => i !== index);
         setTodos(newTodos);
-        // Reset edit state if the deleted todo is currently being edited
-        if (editIndex === index) {
-            setEditIndex(null);
-            setInputValue(''); // Clear the input if we're deleting the currently edited task
-        }
     };
 
     return (
-        <div className="container">
-            <h1>Todo List</h1>
-            <div className="input-container">
-                <input
-                    type="text"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    placeholder="Add a new task"
-                    className="input-field"
-                />
-            </div>
-            <button onClick={addTodo} className="add-button">
-                {editIndex !== null ? 'Update' : 'Add'}
-            </button>
-            <ul>
-                {todos.map((todo, index) => (
-                    <li key={index} className={todo.completed ? 'completed' : ''}>
-                        <input
-                            type="checkbox"
-                            checked={todo.completed}
-                            onChange={() => toggleComplete(index)}
-                            className="checkbox"
-                        />
-                        <span className={`todo-text ${todo.completed ? 'completed' : ''}`}>
-                            {todo.text}
-                        </span>
-                        <div className="todo-buttons">
-                            <button onClick={() => {
-                                setEditIndex(index);
-                                setInputValue(todo.text);
-                            }}>Edit</button>
-                            <button onClick={() => deleteTodo(index)}>Delete</button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+        <div className="container mt-5">
+            <h1 className="text-center mb-4">Todo List</h1>
+            <TodoInput
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                onAdd={addOrUpdateTodo}
+                editIndex={editIndex}
+                setEditIndex={setEditIndex}
+            />
+            <TodoList
+                todos={todos}
+                onToggleComplete={toggleComplete}
+                onEdit={(index) => {
+                    setEditIndex(index); // Set index for edit
+                    setInputValue(todos[index].text); // Populate input with existing text
+                }}
+                onDelete={deleteTodo}
+            />
         </div>
     );
 }
