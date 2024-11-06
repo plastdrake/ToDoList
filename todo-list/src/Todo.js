@@ -43,8 +43,20 @@ function Todo() {
     };
 
     const deleteTodo = (index) => {
-        const newTodos = todos.filter((_, i) => i !== index);
-        setTodos(newTodos);
+        // Show confirmation dialog
+        const confirmDelete = window.confirm("Are you sure you want to delete this task?");
+        
+        // Proceed with deletion if the user confirms
+        if (confirmDelete) {
+            const newTodos = todos.filter((_, i) => i !== index);
+            setTodos(newTodos);
+    
+            // If in edit mode and deleting the edited task, clear input and reset edit mode
+            if (editIndex === index) {
+                setInputValue('');  // Clear the input field
+                setEditIndex(null); // Reset edit mode
+            }
+        }
     };
 
     return (
